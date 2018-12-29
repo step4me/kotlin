@@ -1,7 +1,10 @@
 package chela.kotlin.viewmodel.property
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
+import chela.kotlin.Ch
 
 object PropView:Property(){
     @JvmStatic fun tag(view:View, v:Any){
@@ -20,8 +23,12 @@ object PropView:Property(){
         }
     }
     @JvmStatic fun background(view:View, v:Any){
-        if(v !is String) return
-        view.setBackgroundColor(ChProperty.color(v))
+        when(v){
+            is String ->view.setBackgroundColor(ChProperty.color(v))
+            is Int -> view.setBackgroundResource(v)
+            is Drawable -> view.background = v
+            is Bitmap -> view.background = Ch.app.bitmap2Drawable(v)
+        }
     }
     @JvmStatic fun shadow(view:View, v:Any){
         if(v !is Number || Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return
@@ -46,6 +53,10 @@ object PropView:Property(){
     @JvmStatic fun scaleY(view:View, v:Any){
         if(v !is Number) return
         view.scaleY = v.toFloat()
+    }
+    @JvmStatic fun rotation(view:View, v:Any){
+        if(v !is Number) return
+        view.rotation = v.toFloat()
     }
     @JvmStatic fun alpha(view:View, v:Any){
         if(v !is Number) return

@@ -1,16 +1,26 @@
 package chela.kotlin.viewmodel.property
 
 import android.os.Build
+import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
+import android.widget.EditText
 import chela.kotlin.Ch
 import java.util.*
 
+/**
+ * Base object for view event.
+ */
 object PropEvent:Property(){
     @JvmStatic fun click(view: View, v:Any){
         if(v !is View.OnClickListener) return
         view.isClickable = true
         view.setOnClickListener(v)
+    }
+    @JvmStatic fun longClick(view: View, v:Any){
+        if(v !is View.OnLongClickListener) return
+        view.isLongClickable = true
+        view.setOnLongClickListener(v)
     }
     @JvmStatic fun clickable(view: View, v:Any){
         if(v !is Boolean) return
@@ -19,6 +29,10 @@ object PropEvent:Property(){
     @JvmStatic fun longClickable(view: View, v:Any){
         if(v !is Boolean) return
         view.isLongClickable = true
+    }
+    @JvmStatic fun focusChange(view:View, v:Any){
+        if(v !is View.OnFocusChangeListener || view !is EditText) return
+        view.setOnFocusChangeListener(v)
     }
     @JvmStatic fun focusable(view:View, v:Any){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -41,8 +55,19 @@ object PropEvent:Property(){
         if(v) view.requestFocus()
         focusableInTouchMode(view, v)
     }
+    @JvmStatic fun textChanged(view: View, v:Any){
+        if(v !is Ch.OnTextChanged || view !is EditText) return
+        v.text = view
+        view.addTextChangedListener(v)
+    }
+
     @JvmStatic private val touches = WeakHashMap<View, MutableMap<String, Ch.Touch>>()
     @JvmStatic private val hasTouch = WeakHashMap<View, Boolean>()
+    /**
+     * @param view Attach to the view if there is no touch listener.
+     * @param v Only works if its type is Ch.Touch.
+     * @return MutableMap contains MotionEvent type as key and interface as value.
+     */
     @JvmStatic private fun touch(view:View, v:Any):MutableMap<String, Ch.Touch>?{
         if(v !is Ch.Touch) return null
         if(hasTouch[view] == null){
