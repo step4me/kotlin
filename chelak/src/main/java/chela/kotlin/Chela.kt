@@ -8,12 +8,12 @@ import android.view.MotionEvent
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import chela.kotlin.android.*
-import chela.kotlin.core.ChDate
-import chela.kotlin.core.ChReflect
+import chela.kotlin.core.*
 import chela.kotlin.looper.ChItem
 import chela.kotlin.looper.ChLooper
 import chela.kotlin.sql.ChSql
 import chela.kotlin.thread.ChThread
+import chela.kotlin.validation.ChRuleSet
 import chela.kotlin.viewmodel.ChRouter
 import chela.kotlin.viewmodel.holder.ChFragmentBase
 import chela.kotlin.viewmodel.holder.ChGroupBase
@@ -27,6 +27,11 @@ import java.io.File
  * Chela base object
  */
 object Ch{
+    @Target(AnnotationTarget.PROPERTY) annotation class STRING(val name:String = "")
+    @Target(AnnotationTarget.PROPERTY) annotation class NUMBER(val name:String = "")
+    @Target(AnnotationTarget.PROPERTY) annotation class BOOLEAN(val name:String = "")
+    @Target(AnnotationTarget.PROPERTY) annotation class SHA256(val name:String = "")
+    @Target(AnnotationTarget.PROPERTY) annotation class OUT(val name:String = "")
     /**
      * Interface for touch event(ex down, up, move)
      */
@@ -52,6 +57,7 @@ object Ch{
     @JvmStatic val MOBILE = object:Value{}
     @JvmStatic val NONE = object:Value{}
     @JvmStatic val NONE_BA = ByteArray(0)
+    @JvmStatic val math = ChMath
     @JvmStatic val reflect = ChReflect
     @JvmStatic val thread = ChThread
     @JvmStatic val app = ChApp
@@ -65,7 +71,9 @@ object Ch{
     @JvmStatic val permission = ChPermission
     @JvmStatic val vm = viewmodel
     @JvmStatic val sql = ChSql
+    @JvmStatic val rules = ChRules
     @JvmStatic val view = ChView
+    @JvmStatic val crypto = ChCrypto
     @JvmStatic fun isNone(v:Any):Boolean = v === NONE || v === NONE_BA
 
     @JvmStatic fun waitActivate(activity:AppCompatActivity, looper:ChLooper? = null, block:()->Unit){
@@ -87,7 +95,6 @@ object Ch{
         act.finish()
         System.exit(0)
     }
-
 
 
     @JvmStatic fun looper():ChLooper = ChLooper()
