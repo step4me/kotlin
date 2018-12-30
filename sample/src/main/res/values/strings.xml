@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">sample</string>
+    <string name="current_stage_level">%d / %d</string>
 </resources>
