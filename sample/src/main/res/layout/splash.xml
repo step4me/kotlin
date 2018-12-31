@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:a="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        a:layout_width="match_parent"
+        a:layout_height="match_parent"
+        a:tag="
+            alpha:@{SplashVM.base},
+            background:@{StyleVM.actionBar},
+            x:@{SplashVM.x}
+        ">
+    <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            a:layout_width="match_parent" a:layout_height="match_parent"
+            a:src="@color/colorPrimary"
+            a:scaleType="centerCrop"
+            a:tag="alpha:@{SplashVM.back}"/>
+    <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            a:layout_width="wrap_content" a:layout_height="wrap_content"
+            a:src="@mipmap/ic_launcher_round"
+            a:tag="
+            alpha:@{SplashVM.title},
+            marginTop:@{SplashVM.margin},
+            scaleX:@{SplashVM.sx},
+            scaleY:@{SplashVM.sy}
+        "/>
+</androidx.constraintlayout.widget.ConstraintLayout>

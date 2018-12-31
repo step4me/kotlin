@@ -6,8 +6,6 @@ object MainVM: ChViewModel() {
     var width = 0.0
     var x = 0.0
     var visible = false
-
-    var title = "Drawing"
     var fontSize = 15.0
 
     fun pushed(w: Double) {

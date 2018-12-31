@@ -2,21 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/root_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:tag="x:@{MainVM.x},
-        visibility:@{MainVM.visible}">
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:padding="20dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/item_game_list"/>
+            android:tag="image:@{GameVM.puzzleBitmap}
+            "/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

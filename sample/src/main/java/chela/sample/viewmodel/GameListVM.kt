@@ -6,12 +6,13 @@ import chela.kotlin.viewmodel.ChViewModel
 import chela.sample.R
 import chela.sample.data.Game
 
-object GameLevelVM: ChViewModel() {
+object GameListVM: ChViewModel() {
     var mode = "0"
     var currentStage = 0
     var maxStage = 0
     var stageLevel = ""
     var fontSize = 15.0
+    var clickedItem = Game()
 
     fun pushed(game: Game) {
         mode = game.mode.toString()
